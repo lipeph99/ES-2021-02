@@ -22,10 +22,12 @@
 
 
     <div class="d-flex align-items-center justify-content-end mt-4 form-footer-bar">
+        <button [routerLink]="['/home/admin']">Voltar</button>
         <button
                 (click)="register()"
                 [disabled]="!(
                     entity.nome.value &&
+                    entity.password.value &&
                     entity.kind.value &&
                     ((
                     entity.cnpj.value &&
