@@ -3,7 +3,7 @@ Trabalho prático de Engenharia de software 2021-02.\
 EUquipe: Philippe Santos Silva\
 Tema: [Assinaturas SEI](https://github.com/lipeph99/ES-2021-02)\
 Descrição: Simular um sistemas de assinatura de documentos do SEI, que permite que instituições gerem documentos a serem assinados por usuários\
-Tecnologia full-stack: Fluna
+Tecnologia full-stack: Fluna\
 Product Owner: Larissa Moreira
 
 ## Tarefas Técnicas
