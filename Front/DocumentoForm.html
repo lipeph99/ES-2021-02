@@ -1,0 +1,21 @@
+<div class="background-container registration-form m-0 p-4 anim-showInUp">
+
+    <section class="input-container mx-0">
+        <nick-input [nickCrudField]="entity.titulo" placeholder="Informe o Nome do Documento"></nick-input>
+        <nick-input [nickCrudField]="entity.corpo" placeholder="Preencha o texto do Documento"></nick-input>
+    </section>
+
+
+    <div class="d-flex align-items-center justify-content-end mt-4 form-footer-bar">
+        <button [routerLink]="['/home/company']">Voltar</button>
+        <button
+                (click)="register()"
+                [disabled]="!(
+                    entity.titulo.value &&
+                    entity.corpo.value
+                    )"
+                class="btn-primary col-4"
+        >Cadastrar
+        </button>  
+    </div>
+</div>

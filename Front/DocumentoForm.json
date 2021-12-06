@@ -1,0 +1,82 @@
+{
+    "active": true,
+    "form:entity": {
+      "corpo": {
+        "id": "corpo",
+        "title": "Texto do documento *",
+        "metadata": {
+          "required": true
+        }
+      },
+      "titulo": {
+        "id": "titulo",
+        "title": "Nome do Documento *",
+        "metadata": {
+          "required": true
+        }
+      }
+    },
+    "__ignoreParser": true,
+    "event:register": [
+      {
+        "index": 0,
+        "actions": [
+          {
+            "oquee": "Show Loading",
+            "hook:c3d5c283-7be1-470f-8dda-9806533a8bbe": {}
+          },
+          {
+            "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+              "input": {
+                "args": {
+                  "corpo": "field:form:entity.corpo.value",
+                  "titulo": "field:form:entity.titulo.value"
+                },
+                "processId": "c8d238ea-f5be-4f58-83a0-899cb9ca9e98"
+              },
+              "onError": [
+                {
+                  "oquee": "Hide Loading",
+                  "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
+                },
+                {
+                  "oquee": "alert",
+                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                    "input": {
+                      "data": {
+                        "body": "args:error",
+                        "title": "ERRO!"
+                      },
+                      "config": {
+                        "type": 1
+                      }
+                    }
+                  }
+                }
+              ],
+              "onSuccess": [
+                {
+                  "oquee": "Hide Loading",
+                  "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
+                },
+                {
+                  "oquee": "alert",
+                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                    "input": {
+                      "data": {
+                        "body": "Documento cadastrado.",
+                        "title": "Salvo!"
+                      },
+                      "config": {
+                        "type": 0
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }

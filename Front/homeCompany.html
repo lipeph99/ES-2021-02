@@ -1,0 +1,25 @@
+<h1>Instituição</h1>
+
+<div class="registration-page-container">
+	<header class="header-title-container py-2 mb-4 border-bottom animation-bar-width">
+		<h4>Cadastro de documentos</h4>
+	</header>
+
+    <button [routerLink]="['/documento/form']"
+            class="btn-primary btn-size">Novo Documento
+    </button>
+
+    <div class="list-title">
+        <p class="text-black col-1 mb-0">ID</p>
+        <p class="text-black col-3 mb-0">Título</p>
+    </div>
+    <hr>
+    <ng-container *ngFor="let register of list; let i = index;">
+        <li class="list-content py-3">
+            <div class="d-flex">
+                <p class="col-1 mb-0 outline-none">{{register?.id}}</p>
+                <p class="col-3 mb-0 outline-none">{{register?.titulo}}</p>
+            </div>
+        </li>
+    </ng-container>
+</div>
