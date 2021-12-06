@@ -1,0 +1,64 @@
+<h1>Admin</h1>
+
+<div class="registration-page-container">
+	<header class="header-title-container py-2 mb-4 border-bottom animation-bar-width">
+		<h4>Cadastro de usuários</h4>
+	</header>
+
+    <button [routerLink]="['/usuario/form']"
+            class="btn-primary btn-size">Cadastrar
+    </button>
+    
+	<!--TABS -->
+	<div class="d-flex pt-3 anim-showInUp">
+		<div (click)="onInst()" [class.inactive-tab]="!isUserTab">
+			<h5 class="mr-2 cursor-pointer">Instituições</h5>
+		</div>
+
+		<div (click)="onUser()" [class.inactive-tab]="isUserTab">
+			<h5 class="mx-2 cursor-pointer">Usuarios</h5>
+		</div>
+	</div>
+
+	<div [class.inactiveSelected]="!isUserTab" class="tab-underline anim-showInUp anim-delay-2"></div>
+
+    <ng-container *ngIf="isUserTab">
+        <div class="list-title">
+            <p class="text-black col-3 mb-0">Nome</p>
+            <p class="text-black col-3 mb-0">Email</p>
+            <p class="text-black col-3 mb-0">Celular</p>
+            <p class="text-black col-3 mb-0">Documento</p>
+        </div>
+        <hr>
+        <ng-container *ngFor="let register of list; let i = index;">
+            <li *ngIf="(register?.kind)==2" class="list-content py-3">
+                <div class="d-flex">
+                    <p class="col-3 mb-0 outline-none">{{register?.nome}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.email}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.celular}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.document}}</p>
+                </div>
+            </li>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!isUserTab">
+        <div class="list-title">
+            <p class="text-black col-3 mb-0">Nome</p>
+            <p class="text-black col-3 mb-0">Email</p>
+            <p class="text-black col-3 mb-0">Celular</p>
+            <p class="text-black col-3 mb-0">Documento</p>
+        </div>
+        <hr>
+        <ng-container *ngFor="let register of list; let i = index;">
+            <li *ngIf="(register?.kind)==1" class="list-content py-3">
+                <div class="d-flex">
+                    <p class="col-3 mb-0 outline-none">{{register?.nome}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.email}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.celular}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.document}}</p>
+                </div>
+            </li>
+        </ng-container>
+    </ng-container>
+</div>
