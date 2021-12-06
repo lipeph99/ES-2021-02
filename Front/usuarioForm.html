@@ -3,12 +3,12 @@
     <section class="input-container mx-0">
         <nick-input [nickCrudField]="entity.nome" placeholder="Informe o nome do Usuario/Entidade"></nick-input>
         <nick-select [nickCrudField]="entity.kind" [options]="userTypes" keyField="key" valueField="value"></nick-select>
-        <ng-container *ngIf="entity.kind.value == 2">
+        <ng-container *ngIf="entity.kind.value == 1">
             <nick-input [nickCrudField]="entity.cnpj"></nick-input>
             <span *ngIf="entity.cnpj?.hasError('invalidCnpj')" class="text-danger">
                     Digite um CNPJ válido</span>
         </ng-container>
-        <ng-container *ngIf="entity.kind.value != 2">
+        <ng-container *ngIf="entity.kind.value != 1">
             <nick-input [nickCrudField]="entity.cpf"></nick-input>
             <span *ngIf="entity.cpf?.hasError('invalidCpf')" class="text-danger">
                     Digite um CPF válido</span>
@@ -17,6 +17,7 @@
         <nick-input [nickCrudField]="entity.email" placeholder="Informe o email"></nick-input>
 				<sup *ngIf="entity.email.value && !entity.email.valid"
                              class="d-flex pt-3 text-danger">Formato de email inválido</sup>
+        <nick-input [nickCrudField]="entity.password" placeholder="Informe a senha"></nick-input>
     </section>
 
 
@@ -42,4 +43,3 @@
         </button>  
     </div>
 </div>
-{{entity|console}}
