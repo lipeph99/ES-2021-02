@@ -1,0 +1,149 @@
+{
+    "active": true,
+    "userTypes": [
+      {
+        "key": 1,
+        "value": "Usuario"
+      },
+      {
+        "key": 2,
+        "value": "Empresa"
+      }
+    ],
+    "form:entity": {
+      "cpf": {
+        "id": "cpf",
+        "title": "CPF *",
+        "metadata": {
+          "options": {
+            "mask": "000.000.000-00",
+            "validators": [
+              {
+                "config": {
+                  "key": "invalidCpf"
+                },
+                "hookId": "92eea41b-ea2e-47a4-908d-d500f78738ab"
+              }
+            ]
+          }
+        }
+      },
+      "doc": {
+        "id": "doc"
+      },
+      "tel": {
+        "id": "tel",
+        "title": "Telefone de contato *"
+      },
+      "cnpj": {
+        "id": "cnpj",
+        "title": "CNPJ",
+        "metadata": {
+          "options": {
+            "mask": "00.000.000/0000-00",
+            "validators": [
+              {
+                "config": {
+                  "key": "invalidCnpj"
+                },
+                "hookId": "a9b8d42d-11d7-4c15-b353-57d7e971bbec"
+              }
+            ]
+          }
+        }
+      },
+      "kind": {
+        "id": "kind",
+        "title": "Tipo da conta *"
+      },
+      "nome": {
+        "id": "nome",
+        "title": "Nome do Usuario/Entidade *"
+      },
+      "email": {
+        "id": "email",
+        "title": "Email do responsável *",
+        "metadata": {
+          "options": {
+            "validators": [
+              {
+                "config": {
+                  "key": "invalidEmail",
+                  "regex": "^(([^<>()[\\]\\\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$"
+                },
+                "hookId": "f6be52d0-bb63-4890-a8c0-19b40e3bf250"
+              }
+            ]
+          },
+          "required": true
+        }
+      }
+    },
+    "__ignoreParser": true,
+    "event:register": [
+      {
+        "index": 0,
+        "actions": [
+          {
+            "oquee": "Show Loading",
+            "hook:c3d5c283-7be1-470f-8dda-9806533a8bbe": {}
+          },
+          {
+            "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+              "input": {
+                "args": {
+                  "cpf": "field:form:entity.cpf.value",
+                  "tel": "field:form:entity.tel.value",
+                  "cnpj": "field:form:entity.cnpj.value",
+                  "kind": "field:form:entity.kind.value",
+                  "nome": "field:form:entity.nome.value",
+                  "email": "field:form:entity.email.value"
+                },
+                "processId": "70241332-b85a-4252-8e9f-205549c9c290"
+              },
+              "onError": [
+                {
+                  "oquee": "Hide Loading",
+                  "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
+                },
+                {
+                  "oquee": "alert",
+                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                    "input": {
+                      "data": {
+                        "body": "args:error",
+                        "title": "ERRO!"
+                      },
+                      "config": {
+                        "type": 1
+                      }
+                    }
+                  }
+                }
+              ],
+              "onSuccess": [
+                {
+                  "oquee": "Hide Loading",
+                  "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
+                },
+                {
+                  "oquee": "alert",
+                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                    "input": {
+                      "data": {
+                        "body": "Usuario cadastrado.",
+                        "title": "Salvo!"
+                      },
+                      "config": {
+                        "type": 0
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }

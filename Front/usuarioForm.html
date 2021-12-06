@@ -1,0 +1,45 @@
+<div class="background-container registration-form m-0 p-4 anim-showInUp">
+
+    <section class="input-container mx-0">
+        <nick-input [nickCrudField]="entity.nome" placeholder="Informe o nome do Usuario/Entidade"></nick-input>
+        <nick-select [nickCrudField]="entity.kind" [options]="userTypes" keyField="key" valueField="value"></nick-select>
+        <ng-container *ngIf="entity.kind.value == 2">
+            <nick-input [nickCrudField]="entity.cnpj"></nick-input>
+            <span *ngIf="entity.cnpj?.hasError('invalidCnpj')" class="text-danger">
+                    Digite um CNPJ válido</span>
+        </ng-container>
+        <ng-container *ngIf="entity.kind.value != 2">
+            <nick-input [nickCrudField]="entity.cpf"></nick-input>
+            <span *ngIf="entity.cpf?.hasError('invalidCpf')" class="text-danger">
+                    Digite um CPF válido</span>
+        </ng-container>
+        <nick-input [nickCrudField]="entity.tel" placeholder="Informe o telefone"></nick-input>
+        <nick-input [nickCrudField]="entity.email" placeholder="Informe o email"></nick-input>
+				<sup *ngIf="entity.email.value && !entity.email.valid"
+                             class="d-flex pt-3 text-danger">Formato de email inválido</sup>
+    </section>
+
+
+    <div class="d-flex align-items-center justify-content-end mt-4 form-footer-bar">
+        <button
+                (click)="register()"
+                [disabled]="!(
+                    entity.nome.value &&
+                    entity.kind.value &&
+                    ((
+                    entity.cnpj.value &&
+                    entity.cnpj.valid) ||
+                    (
+                    entity.cpf.value &&
+                    entity.cpf.valid
+                    )) &&
+                    entity.tel.value &&
+                    entity.email.value &&
+                    entity.email.valid
+                    )"
+                class="btn-primary col-4"
+        >Cadastrar
+        </button>  
+    </div>
+</div>
+{{entity|console}}
