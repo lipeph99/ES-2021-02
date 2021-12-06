@@ -10,14 +10,14 @@
     </button>
 
     <div class="list-title">
-        <p class="text-black col-1 mb-0">ID</p>
+        <p class="text-black col-4 mb-0">ID</p>
         <p class="text-black col-3 mb-0">Título</p>
     </div>
     <hr>
     <ng-container *ngFor="let register of list; let i = index;">
         <li class="list-content py-3">
             <div class="d-flex">
-                <p class="col-1 mb-0 outline-none">{{register?.id}}</p>
+                <p class="col-4 mb-0 outline-none">{{register?.id}}</p>
                 <p class="col-3 mb-0 outline-none">{{register?.titulo}}</p>
             </div>
         </li>
