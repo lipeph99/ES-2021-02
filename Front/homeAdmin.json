@@ -1,68 +1,84 @@
 {
-    "onLoad": [
-      {
-        "index": 0,
-        "actions": [
-          {
-            "oquee": "Lista Usuarios",
-            "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
-              "input": {
-                "args": {},
-                "processId": "8dc01670-30b9-4214-b9ad-94f00db61a55"
-              },
-              "onError": [
-                {
-                  "oquee": "alert",
-                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
-                    "input": {
-                      "data": {
-                        "body": "args:error",
-                        "title": "Erro!"
-                      },
-                      "config": {
-                        "type": 1
-                      }
+  "onLoad": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "Lista Usuarios",
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {},
+              "processId": "8dc01670-30b9-4214-b9ad-94f00db61a55"
+            },
+            "onError": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "Erro!"
+                    },
+                    "config": {
+                      "type": 1
                     }
                   }
                 }
-              ],
-              "onSuccess": [
-                {
-                  "set:list": {
-                    "originField": "args:data"
-                  }
+              }
+            ],
+            "onSuccess": [
+              {
+                "set:list": {
+                  "originField": "args:data"
                 }
-              ]
-            }
+              }
+            ]
           }
-        ]
-      }
-    ],
-    "formList": [],
-    "isUserTab": false,
-    "event:onInst": [
-      {
-        "index": 0,
-        "actions": [
-          {
-            "set:isUserTab": {
-              "value": false
-            }
+        }
+      ]
+    }
+  ],
+  "formList": [],
+  "isUserTab": false,
+  "event:onInst": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "set:isUserTab": {
+            "value": false
           }
-        ]
-      }
-    ],
-    "event:onUser": [
-      {
-        "index": 0,
-        "actions": [
-          {
-            "set:isUserTab": {
-              "value": true
-            }
+        }
+      ]
+    }
+  ],
+  "event:onUser": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "set:isUserTab": {
+            "value": true
           }
-        ]
-      }
-    ],
-    "__ignoreParser": true
-  }
+        }
+      ]
+    }
+  ],
+  "event:logout": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "logout",
+          "hook:89ee03a3-1009-4e26-a1b7-80d255163778": {}
+        },
+        {
+          "go:": {
+            "route": "/login"
+          }
+        }
+      ]
+    }
+  ],
+  "__ignoreParser": true
+}

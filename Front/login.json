@@ -1,124 +1,124 @@
 {
-    "form:login": {
-      "email": {
-        "id": "email",
-        "title": "E-mail*",
-        "metadata": {
-          "options": {
-            "validators": [
+  "form:login": {
+    "email": {
+      "id": "email",
+      "title": "E-mail*",
+      "metadata": {
+        "options": {
+          "validators": [
+            {
+              "config": {
+                "key": "invalidEmail",
+                "regex": "^(([^<>()[\\]\\\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$"
+              },
+              "hookId": "f6be52d0-bb63-4890-a8c0-19b40e3bf250"
+            }
+          ]
+        }
+      }
+    },
+    "password": {
+      "id": "password",
+      "title": "Senha*"
+    }
+  },
+  "event:signIn": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "Show Loading",
+          "hook:c3d5c283-7be1-470f-8dda-9806533a8bbe": {}
+        },
+        {
+          "oquee": "Authenticate",
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {
+                "email": "field:form:login.email",
+                "password": "field:form:login.password"
+              },
+              "processId": "8cb02a0f-cefb-4f81-8f6b-f207c2799860"
+            },
+            "onError": [
               {
-                "config": {
-                  "key": "invalidEmail",
-                  "regex": "^(([^<>()[\\]\\\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$"
-                },
-                "hookId": "f6be52d0-bb63-4890-a8c0-19b40e3bf250"
+                "oquee": "hideLoading",
+                "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
+              },
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "Login incorreto!"
+                    },
+                    "config": {
+                      "type": 1
+                    }
+                  }
+                }
+              }
+            ],
+            "onSuccess": [
+              {
+                "hook:0a476bec-d535-4a04-bcc5-de38c9d18ce9": {
+                  "input": {
+                    "token": "args:token"
+                  }
+                }
+              },
+              {
+                "oquee": "hideLoading",
+                "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
+              },
+              {
+                "set:person": {
+                  "originField": "args:data"
+                }
+              },
+              {
+                "oquee": "person.kind igual a 0",
+                "if:person.kind": {
+                  "actions": [
+                    {
+                      "go:": {
+                        "route": "/home/admin"
+                      }
+                    }
+                  ],
+                  "elseActions": [
+                    {
+                      "oquee": "person.kind igual a 1",
+                      "if:person.kind": {
+                        "actions": [
+                          {
+                            "go:": {
+                              "route": "/home/company"
+                            }
+                          }
+                        ],
+                        "elseActions": [
+                          {
+                            "go:": {
+                              "route": "/home/user"
+                            }
+                          }
+                        ],
+                        "conditionKind": 3,
+                        "conditionValue": 1
+                      }
+                    }
+                  ],
+                  "conditionKind": 3,
+                  "conditionValue": 0
+                }
               }
             ]
           }
         }
-      },
-      "password": {
-        "id": "password",
-        "title": "Senha*"
-      }
-    },
-    "event:signIn": [
-      {
-        "index": 0,
-        "actions": [
-          {
-            "oquee": "Show Loading",
-            "hook:c3d5c283-7be1-470f-8dda-9806533a8bbe": {}
-          },
-          {
-            "oquee": "Authenticate",
-            "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
-              "input": {
-                "args": {
-                  "email": "field:form:login.email",
-                  "password": "field:form:login.password"
-                },
-                "processId": "8cb02a0f-cefb-4f81-8f6b-f207c2799860"
-              },
-              "onError": [
-                {
-                  "oquee": "hideLoading",
-                  "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
-                },
-                {
-                  "oquee": "alert",
-                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
-                    "input": {
-                      "data": {
-                        "body": "args:error",
-                        "title": "Login incorreto!"
-                      },
-                      "config": {
-                        "type": 1
-                      }
-                    }
-                  }
-                }
-              ],
-              "onSuccess": [
-                {
-                  "hook:0a476bec-d535-4a04-bcc5-de38c9d18ce9": {
-                    "input": {
-                      "token": "args:token"
-                    }
-                  }
-                },
-                {
-                  "oquee": "hideLoading",
-                  "hook:38d449a1-7c42-4238-b7f6-8b6fa3c9e88a": {}
-                },
-                {
-                  "set:person": {
-                    "originField": "args:data"
-                  }
-                },
-                {
-                  "oquee": "person.kind igual a 0",
-                  "if:person.kind": {
-                    "actions": [
-                      {
-                        "go:": {
-                          "route": "/home/admin"
-                        }
-                      }
-                    ],
-                    "elseActions": [
-                      {
-                        "oquee": "person.kind igual a 1",
-                        "if:person.kind": {
-                          "actions": [
-                            {
-                              "go:": {
-                                "route": "/home/company"
-                              }
-                            }
-                          ],
-                          "elseActions": [
-                            {
-                              "go:": {
-                                "route": "/home/user"
-                              }
-                            }
-                          ],
-                          "conditionKind": 3,
-                          "conditionValue": 1
-                        }
-                      }
-                    ],
-                    "conditionKind": 3,
-                    "conditionValue": 0
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    ],
-    "__ignoreParser": true
-  }
+      ]
+    }
+  ],
+  "__ignoreParser": true
+}

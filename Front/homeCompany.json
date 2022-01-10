@@ -1,43 +1,59 @@
 {
-    "onLoad": [
-      {
-        "index": 0,
-        "actions": [
-          {
-            "oquee": "Lista Documentos",
-            "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
-              "input": {
-                "args": {},
-                "processId": "74b1b36a-20e7-4d1c-83b1-b151e619bd30"
-              },
-              "onError": [
-                {
-                  "oquee": "alert",
-                  "hook:54545aea-cb04-4f25-858d-5d941b575431": {
-                    "input": {
-                      "data": {
-                        "body": "args:error",
-                        "title": "Erro!"
-                      },
-                      "config": {
-                        "type": 1
-                      }
+  "onLoad": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "Lista Documentos",
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {},
+              "processId": "74b1b36a-20e7-4d1c-83b1-b151e619bd30"
+            },
+            "onError": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "Erro!"
+                    },
+                    "config": {
+                      "type": 1
                     }
                   }
                 }
-              ],
-              "onSuccess": [
-                {
-                  "set:list": {
-                    "originField": "args:data"
-                  }
+              }
+            ],
+            "onSuccess": [
+              {
+                "set:list": {
+                  "originField": "args:data"
                 }
-              ]
-            }
+              }
+            ]
           }
-        ]
-      }
-    ],
-    "formList": [],
-    "__ignoreParser": true
-  }
+        }
+      ]
+    }
+  ],
+  "event:logout": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "logout",
+          "hook:89ee03a3-1009-4e26-a1b7-80d255163778": {}
+        },
+        {
+          "go:": {
+            "route": "/login"
+          }
+        }
+      ]
+    }
+  ],
+  "formList": [],
+  "__ignoreParser": true
+}
