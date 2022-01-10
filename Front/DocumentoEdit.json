@@ -1,0 +1,125 @@
+{
+  "lista": [],
+  "onLoad": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {
+                "id": "field:_id"
+              },
+              "processId": "8ae1dc96-a841-41cd-877d-b700592ad55b"
+            },
+            "onError": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "Erro!"
+                    },
+                    "config": {
+                      "type": 1
+                    }
+                  }
+                }
+              }
+            ],
+            "onSuccess": [
+              {
+                "set:titulo": {
+                  "originField": "args:documento.titulo"
+                }
+              },
+              {
+                "set:userList": {
+                  "originField": "args:userList"
+                }
+              },
+              {
+                "set:lista": {
+                  "originField": "args:assinaList"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "titulo": "Filler",
+  "userList": [],
+  "form:usuario": {
+    "id": {
+      "id": "id"
+    },
+    "nome": {
+      "id": "nome",
+      "title": "Nome do usuario *",
+      "metadata": {
+        "required": true
+      }
+    },
+    "usuario": {
+      "id": "usuario",
+      "title": "Selecione o usuario para vincular ao documento *",
+      "metadata": {
+        "required": true
+      }
+    }
+  },
+  "__ignoreParser": true,
+  "event:vincular": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {
+                "id": "field:form:usuario.usuario.value",
+                "documento": "field:_id"
+              },
+              "processId": "b809ec17-d797-4ed5-ab5b-45e7bf02ae75"
+            },
+            "onError": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "ERRO!"
+                    },
+                    "config": {
+                      "type": 1
+                    }
+                  }
+                }
+              }
+            ],
+            "onSuccess": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "Usuario vinculado ao documento",
+                      "title": "Salvo!"
+                    },
+                    "config": {
+                      "type": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

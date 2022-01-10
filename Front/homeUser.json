@@ -1,0 +1,151 @@
+{
+  "onLoad": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "Lista Documentos Para Assinar",
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {},
+              "processId": "528f6c46-22eb-4e7d-bfc7-b01b81e5cd0f"
+            },
+            "onError": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "Erro!"
+                    },
+                    "config": {
+                      "type": 1
+                    }
+                  }
+                }
+              }
+            ],
+            "onSuccess": [
+              {
+                "set:list": {
+                  "originField": "args:data"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "formList": [],
+  "event:logout": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "logout",
+          "hook:89ee03a3-1009-4e26-a1b7-80d255163778": {}
+        },
+        {
+          "go:": {
+            "route": "/login"
+          }
+        }
+      ]
+    }
+  ],
+  "__ignoreParser": true,
+  "event:assinaDoc": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "set:_item": {
+            "originField": "args:"
+          }
+        },
+        {
+          "oquee": "Assina Documento",
+          "hook:d0da5142-3d32-4648-92be-f0f36c00a03f": {
+            "input": {
+              "args": {
+                "id": "field:_item.id"
+              },
+              "processId": "d620b37b-0e1a-428d-936c-651b6e3e7dbb"
+            },
+            "onError": [
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "args:error",
+                      "title": "Erro!"
+                    },
+                    "config": {
+                      "type": 1
+                    }
+                  }
+                }
+              }
+            ],
+            "onSuccess": [
+              {
+                "set:_item.status": {
+                  "value": 1
+                }
+              },
+              {
+                "event:closeModal": {}
+              },
+              {
+                "oquee": "alert",
+                "hook:54545aea-cb04-4f25-858d-5d941b575431": {
+                  "input": {
+                    "data": {
+                      "body": "Documento assinado",
+                      "title": "Salvo!"
+                    },
+                    "config": {
+                      "type": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "event:openModal": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "oquee": "modal",
+          "hook:0da350cf-4af9-428b-b8b1-82e0d156b454": {
+            "input": {
+              "config": {
+                "class": "modal-center",
+                "template": "args:",
+                "showClose": false
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event:closeModal": [
+    {
+      "index": 0,
+      "actions": [
+        {
+          "hook:7cb2802a-a4eb-45c8-8d0c-177feb4b2e9f": {}
+        }
+      ]
+    }
+  ]
+}

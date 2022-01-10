@@ -1,0 +1,49 @@
+<h1>User</h1>
+
+<button (click)="logout()"
+    class="btn-info btn-size">Logout
+</button>
+
+<div class="registration-page-container">
+    <div class="list-title">
+        <span class="text-black col-4 mb-0" style="margin-right:750px">ID</span>
+        <span class="text-black col-1 mb-0">Ação</span>
+    </div>
+    <hr>
+
+    <ng-container *ngFor="let register of list; let i = index;">
+        <ul>
+            <li class="list-content py-3">
+                <div class="d-flex">
+                    <p class="col-4 mb-0 outline-none">{{register?.id}}</p>
+                    <p class="col-3 mb-0 outline-none">{{register?.titulo}}</p>
+                    <ng-container *ngIf="!register?.status">
+                        <button (click)="openModal(assinar)"
+                            class="btn-default btn-size">Assinar
+                        </button>
+                    </ng-container>
+                    <ng-container *ngIf="register?.status">
+                        <button [disabled]="register?.status"
+                            class="btn-success btn-size">Assinado
+                        </button>
+                    </ng-container>
+                </div>
+
+                <ng-template #assinar>
+                    <div class="text-center m-4 delete-modal">
+                        <h5>Assinatura</h5>
+                        <span class="font-weight-bolder">Deseja assinar esse documento?</span>
+                        <div class="d-flex justify-content-center">
+                            <button (click)="closeModal()" class="btn-default col-5">Voltar</button>
+                            <button (click)="assinaDoc(register)"
+                                class="btn-success col-5"
+                            >Assinar
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </li>
+        </ul>
+    </ng-container>
+</div>

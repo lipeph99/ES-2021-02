@@ -1,0 +1,29 @@
+<div class="registration-page-container">
+	<header class="header-title-container py-2 mb-4 border-bottom animation-bar-width">
+		<h4>Vincular Usuarios a um Documento</h4>
+        <h5>{{titulo}}</h5>
+	</header>
+
+    <nick-select [nickCrudField]="usuario.usuario" [options]="userList" keyField="id" valueField="nome">
+	</nick-select>
+    <button (click)="vincular()"
+            class="btn-primary btn-size">Vincular Usuario
+    </button>
+    <hr>
+
+    <h6> Usuarios já vinculados </h6>
+
+    <ul>
+        <ng-container *ngFor="let register of lista; let i = index;">
+            <li class="list-content py-3">
+                <div class="d-flex">
+                    <p class="col-4 mb-0 outline-none">{{register?.id}}</p>
+                </div>
+            </li>
+        </ng-container>
+    </ul>
+
+    <div class="d-flex align-items-center justify-content-end mt-4 form-footer-bar">
+        <button [routerLink]="['/home/company']" class="btn-primary col-4">Voltar</button>
+    </div>
+</div>
